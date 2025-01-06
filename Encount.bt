@@ -1,0 +1,26 @@
+//---------------------------------------------
+// Includes
+//---------------------------------------------
+#include "common/include.h"
+#include "metaphor_structs.h"
+#include "metaphor_enums.bt"
+
+typedef struct
+{
+  SetRandomBackColor();
+  
+  u32 Flags<format=hex>;
+  u32 Field04;
+  EnemyID EnemyIDList[6];
+  s16 fld_major;
+  s16 fld_minor;
+  u16 bgm_cue_id;
+  u16 Field1A;
+} Encount <optimize=false, read=Str( "0x%08X %03d_%03d -> %04d", Flags, fld_major, fld_minor, bgm_cue_id )>; // size=0x1C, 
+
+typedef struct
+{
+  Encount entries[ FileSize() / 0x1C ];
+} Bin <optimize=false>;
+
+Bin bin;

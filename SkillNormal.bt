@@ -1,0 +1,96 @@
+//---------------------------------------------
+// Includes
+//---------------------------------------------
+#include "common/include.h"
+#include "metaphor_structs.h"
+#include "metaphor_enums.bt"
+
+typedef struct
+{
+  SetRandomBackColor();
+  
+  CasterEffect CasterEff <name="Caster Effect">;
+  SkillUseConditions Usable_In;
+  PhysOrMagType Phys_Or_Mag;
+  u8 Range;
+  CostTypeEnum Cost_Type<name="Cost Type">;
+  u16 HP_Percent_Cost<name="% HP Cost">;
+  u16 MP_Cost<name="MP Cost">;
+  u16 Field0A;
+  TargetCount Target_Count<name="Target Count">;
+  TargetSide Target_Side<name="Target Side">;
+  TargetCondition Target_Condition<name="Target Condition">;
+  u8 Field0F;
+  u8 Field10;
+  u8 Field11;
+  u8 Field12;
+  u8 Field13;
+  u8 Accuracy;
+  u8 Min_Hit_Count;
+  u8 Max_Hit_Count;
+  DamageType HP_Damage_Type;
+  u16 SkillPower;
+  DamageType MP_Damage_Type;
+  u8 Field1A;
+  u8 MPDrainPower <name="MP Power">;
+  u8 Field1C;
+  ApplyOrCure Apply_Cure;
+  u8 ProbabilityApplyCure<name="% of Chance to Apply/Cure">;
+  struct
+        {
+            bool Poison : 1 <name = "Poison">;
+            bool Malady : 1 <name = "Malady">;
+            bool Paralysis : 1 <name = "Paralysis">;
+            bool Hex : 1 <name = "Hex">;
+            bool Burn : 1 <name = "Burn">;
+            bool Frostbite : 1 <name = "Frostbite">;
+            bool Unknown : 1 <name = "Unknown">;
+            bool Unknown1 : 1 <name = "Unknown">;
+        } AilmentEffectss <name = "Ailments 1">;
+  struct
+	{
+		bool Unknown : 1 <name = "Unknown">;
+		bool Unknown1 : 1 <name = "Unknown">;
+		bool Unknown2 : 1 <name = "Unknown">;
+		bool Unknown3 : 1 <name = "Unknown">;
+		bool Charm : 1 <name = "Charm">;
+		bool Daze : 1 <name = "Daze">;
+		bool Forget : 1 <name = "Forget">;
+		bool Sleep : 1 <name = "Sleep">;
+	} AilmentEffectss2 <name = "Ailments 2">;
+	struct
+	{
+		bool Rage : 1 <name = "Rage">;
+		bool Anxiety : 1 <name = "Anxiety">;
+		bool Unknown1 : 1 <name = "Unknown">;
+		bool Death : 1 <name = "Death">;
+		bool Unknown2 : 1 <name = "Unknown">;
+		bool Unknown3 : 1 <name = "Unknown">;
+		bool Unknown4 : 1 <name = "Unknown">;
+		bool Unknown5 : 1 <name = "Unknown">;
+	} AilmentEffectss3 <name = "Ailments 3">;
+	struct
+	{
+		bool Unknown : 1 <name = "Unknown">;
+		bool Unknown1 : 1 <name = "Unknown">;
+		bool Unknown2 : 1 <name = "Unknown">;
+		bool Unknown3 : 1 <name = "Unknown">;
+		bool Unknown4 : 1 <name = "Unknown">;
+		bool Unknown5 : 1 <name = "Unknown">;
+		bool Unknown6 : 1 <name = "Unknown">;
+		bool Unknown7 : 1 <name = "Unknown">;
+	} AilmentEffectss4 <name = "Ailments 4">;
+  BuffDebuffEffectType OneTime <name="Buff or Debuff Application">;
+  u16 Field26;
+  SpecialEffectType SpecialEffect <name="Special Effect">;
+  u16 CriticalChance <name="Critical Chance">;
+  u16 Field2C;
+  u16 Field2E;
+} SkillNormalTBL <optimize=false, read=Str( "%02d %04d", MP_Cost, Accuracy )>; // size=0x30, 
+
+typedef struct
+{
+  SkillNormalTBL entries[ FileSize() / 0x30 ];
+} Bin <optimize=false>;
+
+Bin bin;
